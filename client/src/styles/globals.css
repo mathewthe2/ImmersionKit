@@ -1,0 +1,7 @@
+/* Global Styling here */
+.wrapped {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+  
