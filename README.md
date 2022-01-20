@@ -9,6 +9,13 @@ cd client
 yarn install
 ```
 
+Run in development mode.
+
+```bash
+yarn run dev
+```
+
+
 ### Build
 
 ```bash
