@@ -56,7 +56,7 @@ const SidebarContent = (props) => {
       aria-label="Main Navigation"
     >
       <NavItem icon={FiSearch} onClick={()=>router.push('/search')}>Search</NavItem>
-      <NavItem icon={BsGearFill} onClick={()=>router.push('/settings')} >Settings</NavItem>
+      <NavItem icon={BsGearFill} onClick={()=>router.push('/settings')}>Settings</NavItem>
     </Flex>
   </Box>
  )
