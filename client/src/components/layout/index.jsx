@@ -19,7 +19,7 @@ import {
 } from "@chakra-ui/react";
 import { BsGearFill } from "react-icons/bs";
 import { FiSearch, FiMenu } from "react-icons/fi";
-import { FaMoon, FaSun, FaRss, FaClipboardCheck } from "react-icons/fa";
+import { FaMoon, FaSun, FaRss, FaClipboardCheck, FaBookReader } from "react-icons/fa";
 // import { MdHome } from "react-icons/md";
 // import { HiCode, HiCollection } from "react-icons/hi";
 import { useRouter } from 'next/router'
@@ -56,6 +56,7 @@ const SidebarContent = (props) => {
       aria-label="Main Navigation"
     >
       <NavItem icon={FiSearch} onClick={()=>router.push('/search')}>Search</NavItem>
+      <NavItem icon={FaBookReader} onClick={()=>router.push('/reader')}>Reader</NavItem>
       <NavItem icon={BsGearFill} onClick={()=>router.push('/settings')}>Settings</NavItem>
     </Flex>
   </Box>

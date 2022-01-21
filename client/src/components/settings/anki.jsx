@@ -22,8 +22,8 @@ function Anki() {
   const [fieldNames, setFieldNames] = useState([]);
 
   useEffect(() => {
-    getDeckNames().then((deckNames) => setDeckNames(deckNames));
-    getModelNames().then((modelNames) => setModelNames(modelNames));
+    getDeckNames().then((deckNames) => setDeckNames(deckNames.sort()));
+    getModelNames().then((modelNames) => setModelNames(modelNames.sort()));
   }, {});
 
   useEffect(() => {

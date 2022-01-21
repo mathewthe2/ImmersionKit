@@ -60,3 +60,10 @@ def get_models():
 def get_fields(model_name=None):
     field_names = ankiHelper.get_model_field_names(model_name)
     return jsonify(field_names)
+
+@bp.route("/api/reader")
+@bp.route("/api/reader/<string:deck_name>")
+def reader(deck_name=None):
+    notes = ankiHelper.get_notes(deck_name)
+    return jsonify(notes)
+    
