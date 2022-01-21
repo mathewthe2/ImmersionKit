@@ -6,6 +6,13 @@ from aqt import mw
 from aqt.utils import openLink
 from aqt.qt import *
 
+# port = 5006
+# try:
+#     user_config = mw.addonManager.getConfig(__name__)
+#     port = user_config['server_port']
+# except:
+#     pass
+
 s = Server('0.0.0.0', 5006, dev_mode=config['dev_mode'])
 
 WINDOW_DISPLAY = False
@@ -29,6 +36,7 @@ def showApp():
 
 
 action = QAction("Immersion Kit", mw)
+action.setShortcut(QKeySequence("Ctrl+I"))
 
 # set it to call testFunction when it's clicked
 action.triggered.connect(showApp)
