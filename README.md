@@ -12,7 +12,7 @@ yarn install
 Run in development mode.
 
 ```bash
-yarn run dev
+yarn dev
 ```
 
 
@@ -20,6 +20,6 @@ yarn run dev
 
 ```bash
 cd client
-yarn run build
+yarn build
 next export -o ../server/app
 ```
