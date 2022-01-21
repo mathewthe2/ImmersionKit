@@ -101,7 +101,7 @@ function Reader() {
         <Select ml={5} maxWidth={20} value={page} onChange={(e)=>setPage(parseInt(e.target.value, 10))}>
           {Array.from(Array(totalPages || 0), (e, i) => <option key={`page_${i}`}>{i+1}</option>)}
         </Select>
-        <Button ml={5} onClick={()=>setPage(page+1)}>Next</Button>
+        <Button ml={5} onClick={()=>setPage(page+1)} disabled={totalPages && page === totalPages}>Next</Button>
       </Flex>
     )
   }
