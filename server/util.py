@@ -82,16 +82,10 @@ class AnkiHelper():
                 # Best behavior is probably to add an 'empty card' to the
                 # returned result, so that the items of the input and return
                 # lists correspond.
-                result.append({})
-
-        return result
-
-        
-
-# def get_deck_names():
-#     deck_names = ', '.join([l['name'] for l in mw.col.decks.all()])
-#     return deck_names
-
-# def get_field_names():
-#     models = mw.col.models
-#     ret = fieldNames = models.fieldNames(model)
+                result.append({})   
+        return {
+            "total": len(note_ids),
+            "offset": offset,
+            "limit": limit,
+            "data": result
+        }

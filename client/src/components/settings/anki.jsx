@@ -24,7 +24,7 @@ function Anki() {
   useEffect(() => {
     getDeckNames().then((deckNames) => setDeckNames(deckNames.sort()));
     getModelNames().then((modelNames) => setModelNames(modelNames.sort()));
-  }, {});
+  }, []);
 
   useEffect(() => {
     if (activeModel.length > 0) {

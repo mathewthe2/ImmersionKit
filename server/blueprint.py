@@ -64,6 +64,8 @@ def get_fields(model_name=None):
 @bp.route("/api/reader")
 @bp.route("/api/reader/<string:deck_name>")
 def reader(deck_name=None):
-    notes = ankiHelper.get_notes(deck_name)
+    offset = request.args.get('offset', type=int, default=0)
+    limit = request.args.get('limit', type=int, default=10)
+    notes = ankiHelper.get_notes(deck_name, offset, limit)
     return jsonify(notes)
     

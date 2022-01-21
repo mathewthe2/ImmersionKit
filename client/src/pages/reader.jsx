@@ -2,6 +2,7 @@ import {
   Flex,
   Text,
   Box,
+  Button,
   Select,
   Image,
   useColorModeValue,
@@ -73,19 +74,41 @@ function Reader() {
   const [deckNames, setDeckNames] = useState([]);
   const [activeDeck, setActiveDeck] = useState("Anime - Spirited Away");
   const [notes, setNotes] = useState([]);
+  const [page, setPage] = useState(1);
+  const limit = 10;
 
   useEffect(() => {
     getDeckNames().then((deckNames) => setDeckNames(deckNames.sort()));
-  }, {});
+  }, []);
 
   useEffect(() => {
-    // console.log(activeDeck);
-    getNotesByDeck({ deckName: activeDeck }).then((notes) => setNotes(notes));
-  }, [activeDeck]);
+    console.log(activeDeck);
+    getNotesByDeck({ deckName: activeDeck, offset:(page-1) * limit }).then((notes) => setNotes(notes));
+  }, [activeDeck, page]);
+
+  const switchDeck = (deckName) => {
+    setPage(1);
+    setActiveDeck(deckName);
+  }
+
+  // const nextPage = () => setPage(page+1);
+
+  function Pagination() {
+    const totalPages = Math.ceil(notes?.total / limit);
+    return (
+      <Flex p={5} alignItems="center"  justifyContent="center">
+        <Button onClick={()=>setPage(page-1)} disabled={page <= 1}>Previous</Button>
+        <Select ml={5} maxWidth={20} value={page} onChange={(e)=>setPage(parseInt(e.target.value, 10))}>
+          {Array.from(Array(totalPages || 0), (e, i) => <option key={`page_${i}`}>{i+1}</option>)}
+        </Select>
+        <Button ml={5} onClick={()=>setPage(page+1)}>Next</Button>
+      </Flex>
+    )
+  }
 
   return (
     <Box>
-      <Select placeholder="Select deck" onChange={(e)=>setActiveDeck(e.target.value)}>
+      <Select placeholder="Select deck" onChange={(e)=>switchDeck(e.target.value)}>
         {deckNames.map((deckName) => (
           <option key={`deck_option_${deckName}`} value={deckName} >
             {deckName}
@@ -93,8 +116,9 @@ function Reader() {
         ))}
       </Select>
       {/* {activeDeck} */}
-      {notes &&
-        notes.map((note, index) => (
+      {notes?.data?.length > 0 && < Pagination/>}
+      {notes?.data &&
+        notes.data.map((note, index) => (
             <Box mt={2} mb={2} key={`sentence_${index}`}>
               <Sentence
                 sentence={note?.fields?.sentence}
@@ -106,6 +130,7 @@ function Reader() {
         ))}
         {activeDeck.length > 0 && notes.length === 0 && 
         <Text mt={2}>No compatible notes found for {activeDeck}.</Text>}
+        {notes?.data?.length > 0 && < Pagination/>}
     </Box>
   );
 }
