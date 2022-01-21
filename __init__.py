@@ -28,7 +28,7 @@ def showApp():
         openLink(QUrl(CLIENT_URL))
 
 
-action = QAction("Immersion Kit Web", mw)
+action = QAction("Immersion Kit", mw)
 
 # set it to call testFunction when it's clicked
 action.triggered.connect(showApp)
