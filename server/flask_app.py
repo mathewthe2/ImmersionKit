@@ -49,7 +49,9 @@ def create_flask_app(test_config=None, dev_mode=False):
     # from . import db
     # db.init_app(app)
 
+    import importlib
     from . import blueprint
+    importlib.reload(blueprint) # support hot reload of the blueprint
     app.register_blueprint(blueprint.bp, dev_mode=dev_mode)
     app.add_url_rule('/', endpoint='index')
 
