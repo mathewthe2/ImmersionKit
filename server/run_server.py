@@ -14,7 +14,7 @@ class Server:
     self.port = port
     self.app = create_flask_app(dev_mode=dev_mode)
 
-    self.srv = make_server(host=self.host, port=self.port, app=self.app)
+    self.srv = make_server(host=self.host, threaded=True, port=self.port, app=self.app)
     self.srv.daemon_threads = True
     self.server_thread = threading.Thread(target=self.run, daemon=True)
     self.server_thread.start()
