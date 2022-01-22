@@ -13,23 +13,23 @@ from aqt.qt import *
 # except:
 #     pass
 
-# s = Server('0.0.0.0', 5006, dev_mode=config['dev_mode'])
+s = Server('0.0.0.0', 5006, dev_mode=config['dev_mode'])
 
-def create_server():
-  return Server('0.0.0.0', 5006, dev_mode=config['dev_mode'])
+# def create_server():
+#   return Server('0.0.0.0', 5006, dev_mode=config['dev_mode'])
 
-server = create_server()
+# server = create_server()
 
-def restartServer():
-  global server
-  server.shutdown()
-  server = create_server()
+# def restartServer():
+#   global server
+#   server.shutdown()
+#   server = create_server()
 
-if config['dev_mode']:
-    action = QAction("Restart Immersion Kit &Server", mw)
-    action.setShortcut(QKeySequence("Ctrl+S"))
-    action.triggered.connect(restartServer)
-    mw.form.menuTools.addAction(action)
+# if config['dev_mode']:
+#     action = QAction("Restart Immersion Kit &Server", mw)
+#     action.setShortcut(QKeySequence("Ctrl+S"))
+#     action.triggered.connect(restartServer)
+#     mw.form.menuTools.addAction(action)
 
 WINDOW_DISPLAY = False
 CLIENT_URL = "http://localhost:5006/search.html"
