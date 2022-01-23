@@ -1,6 +1,18 @@
 from aqt import mw
-from .reader import MODEL_MAPS
+import os
+import json
 
+# Paths
+user_files_directory = os.path.join(os.path.dirname(__file__), '..', 'user_files')
+
+def get_reader_model_maps():
+    with open(os.path.join(user_files_directory, 'reader.json'), 'r') as f:
+        reader_config = json.load(f)
+    if 'model_maps' in reader_config:
+        return reader_config['model_maps']
+    else:
+        return None
+        
 try:
     from anki.rsbackend import NotFoundError
 except:
@@ -53,8 +65,9 @@ class AnkiHelper():
                 note = self.collection().get_note(note_id)
                 model = note.model()
 
-                if model['name'] in MODEL_MAPS:
-                    field_map = MODEL_MAPS[model['name']]
+                model_maps = get_reader_model_maps()
+                if model['name'] in model_maps:
+                    field_map = model_maps[model['name']]
                     fields = {}
                     for info in model['flds']:
                         name = info['name']
@@ -67,6 +80,8 @@ class AnkiHelper():
                             if "[sound:" in value:
                                 file_name = value.split('[sound:')[1].split(']')[0]
                                 value = 'http://127.0.0.1:{}/{}'.format(self.media_server().getPort(), file_name)
+                            elif ".mp3" in value:
+                                value = 'http://127.0.0.1:{}/{}'.format(self.media_server().getPort(), value)
                             fields[field_map[name]] = value
                             
                     result.append({
