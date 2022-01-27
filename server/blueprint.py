@@ -45,6 +45,22 @@ def get_app(path):
         return proxy(WEBPACK_DEV_SERVER_HOST, "/app/" + path)
     return send_from_directory('app', path)
 
+# Reroutes for when user refresh page
+# TODO: dynamic rerouting
+
+@bp.route("/search")
+def redirect_search():
+     return redirect("/search.html")
+
+@bp.route("/reader")
+def redirect_reader():
+     return redirect("/reader.html")
+
+@bp.route("/settings")
+def redirect_settings():
+     return redirect("/settings.html")
+    
+
 @bp.route("/api/decks")
 def get_decks():
     deck_names = ankiHelper.get_deck_names()
